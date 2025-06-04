@@ -1,7 +1,9 @@
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background: #f4f4f4;
+    background: #ebebeb;
     margin: 0;
+    background-image: url(./img/body-pat.png);
+    background-size: 40px 40px; /* or use 'contain', or a specific size like '100px 100px' */
 }
 
 #title-bar {
@@ -181,7 +183,7 @@ footer a:hover {
 
 #tracking-form label {
     font-weight: bold;
-    color: #de2910;
+    color: #002b56;
     display: block;
     margin-bottom: 10px;
 }
@@ -196,7 +198,7 @@ footer a:hover {
 }
 
 #tracking-form button {
-    background: #de2910;
+    background: #002b56;
     color: #fff;
     border: none;
     padding: 8px 18px;
@@ -209,8 +211,8 @@ footer a:hover {
 }
 
 #tracking-form button:hover {
-    background: #ffd10c;
-    color: #de2910;
+    background: #de2910;
+    color: #fff;
 }
 
 .tracking-status {
