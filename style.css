@@ -1,0 +1,234 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+}
+
+#title-bar {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+#logo {
+    width: 200px;
+    margin: 10px 0 10px 20px;
+    display: block;
+    height: auto;
+}
+
+#logo-title {
+    font-size: 20px;
+    color: #ffd10c;
+    font-weight: bold;
+    margin: 10px 0 10px 9px;
+    line-height: 0.8;
+}
+
+#title-container {
+    display: flex;
+    align-items: center;
+    width: 5%;
+}
+
+#nav-list {
+    list-style: none;
+    background: rgba(54, 56, 133, 0.7);
+    backdrop-filter: blur(10px);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#nav-list li {
+    margin: 0 10px;
+    flex: 1;
+    text-align: center;
+}
+
+#nav-list li a {
+    color: #fff;
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: text-decoration 0.2s;
+}
+
+#nav-list li a:hover {
+    text-decoration: underline;
+}
+
+.info-banner {
+    background: #002b56;
+    height: 250px;
+    margin-top: -20px;
+    display: flex;
+    align-items: center;
+}
+
+#info-banner-text-container {
+    flex: 1;
+    padding-right: 30px;
+    margin: 30px;
+}
+
+#info-banner-text-container h2 {
+    font-family: 'Gilroy-Bold', sans-serif;
+    color: #fff;
+    font-size: 50px;
+    font-weight: bold;
+    margin: 0;
+}
+
+#info-banner-text-container p {
+    font-family: 'Gilroy-Regular', sans-serif;
+    color: #fff;
+    font-size: 22px;
+    margin: 10px 0 0 0;
+}
+
+.info-banner img {
+    height: 250px;
+    object-fit: cover;
+}
+
+main {
+    font-size: 40px;
+}
+
+#main-nav {
+    position: sticky;
+    top: 80px; /* igual a la altura del title-bar */
+    z-index: 99;
+    width: 100%;
+}
+
+main {
+    margin: 50px;
+}
+
+footer {
+    background: #555555;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    height: auto; /* Ajusta el tamaño al contenido */
+    min-height: 100px;
+}
+
+footer table {
+    width: 100%;
+    table-layout: fixed;
+    height: auto; /* Ajusta el tamaño al contenido */
+}
+
+footer td {
+    vertical-align: top;
+    text-align: left; /* Alinea el contenido a la izquierda */
+    padding: 0 10px;
+}
+
+footer p {
+    vertical-align: middle;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+footer ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0 auto;
+    display: block; /* Cambia a block para mejor alineación */
+}
+
+footer li {
+    text-align: left;
+    display: list-item; /* Cambia a list-item para alineación estándar */
+}
+
+footer a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 12px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#tracking-section {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 30px 20px;
+    max-width: 400px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+#tracking-form label {
+    font-weight: bold;
+    color: #de2910;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#tracking-form input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 70%;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+#tracking-form button {
+    background: #de2910;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: background 0.2s;
+}
+
+#tracking-form button:hover {
+    background: #ffd10c;
+    color: #de2910;
+}
+
+.tracking-status {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.tracking-status.success {
+    background: #e6ffe6;
+    color: #228B22;
+    border: 1px solid #228B22;
+}
+
+.tracking-status.error {
+    background: #ffe6e6;
+    color: #b22222;
+    border: 1px solid #b22222;
+}
