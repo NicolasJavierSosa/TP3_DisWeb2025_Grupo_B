@@ -115,6 +115,7 @@ main {
 
 main {
     margin: 50px;
+    height: 700px;
 }
 
 footer {
@@ -128,18 +129,22 @@ footer {
 }
 
 footer table {
-    width: 100%;
+    width: 80%; /* Reduce el ancho para mejor centrado visual */
     table-layout: fixed;
     height: auto; /* Ajusta el tamaño al contenido */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; /* Centra el contenido de la tabla */
 }
 
 footer td {
     vertical-align: top;
-    text-align: left; /* Alinea el contenido a la izquierda */
+    text-align: center; /* Centra el contenido de cada celda */
     padding: 0 10px;
+    width: auto; /* Permite que los td se distribuyan equitativamente */
 }
 
-footer p {
+footer table p {
     vertical-align: middle;
     color: #fff;
     font-weight: bold;
@@ -175,10 +180,32 @@ footer a:hover {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    padding: 30px 20px;
+    padding: 0;
     max-width: 400px;
     margin: 40px auto;
     text-align: center;
+    overflow: hidden; /* Para bordes redondeados en la barra superior */
+    border: 1px solid #e0e0e0;
+}
+
+#tracking-section .tracking-title-bar {
+    background: #002b56;
+    color: #ffffff;
+    font-family: 'Gilroy-Bold', 'Trebuchet MS', Arial, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 18px 0 14px 0;
+    letter-spacing: 1px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: 0;
+}
+
+#tracking-section .tracking-form-container {
+    background: #fff;
+    padding: 30px 20px 20px 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 #tracking-form label {
@@ -186,33 +213,41 @@ footer a:hover {
     color: #002b56;
     display: block;
     margin-bottom: 10px;
+    font-size: 15px;
 }
 
 #tracking-form input[type="text"] {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
+    padding: 10px 14px;
+    border: 1.5px solid #002b56;
     border-radius: 5px;
     width: 70%;
     margin-bottom: 10px;
     font-size: 16px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+#tracking-form input[type="text"]:focus {
+    border: 1.5px solid #de2910;
+    background: #f7faff;
 }
 
 #tracking-form button {
     background: #002b56;
     color: #fff;
     border: none;
-    padding: 8px 18px;
+    padding: 10px 22px;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
     font-size: 16px;
     margin-left: 10px;
-    transition: background 0.2s;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
 #tracking-form button:hover {
-    background: #de2910;
-    color: #fff;
+    background: #b22222;
 }
 
 .tracking-status {
@@ -233,4 +268,25 @@ footer a:hover {
     background: #ffe6e6;
     color: #b22222;
     border: 1px solid #b22222;
+}
+
+.footer-extra {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #888;
+    color: #fff;
+    font-size: 13px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.footer-extra a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-extra a:hover {
+    text-decoration: underline;
+    color: #de2910;
 }

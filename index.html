@@ -33,12 +33,14 @@
 
     <main>
         <section id="tracking-section">
-            <form id="tracking-form">
-                <label for="tracking-number">Número de seguimiento:</label>
-                <input type="text" id="tracking-number" name="tracking-number" required placeholder="Ej: 1234567890">
-                <button type="submit">Consultar</button>
-            </form>
-            <div id="tracking-result"></div>
+            <div class="tracking-title-bar">Número de Seguimiento</div>
+            <div class="tracking-form-container">
+                <form id="tracking-form">
+                    <input type="text" placeholder="Ingresá tu número de seguimiento" />
+                    <button type="submit">Consultar</button>
+                </form>
+                <div id="tracking-result"></div>
+            </div>
         </section>
     </main>
 
@@ -92,6 +94,11 @@
                 </tr>
             </tbody>
         </table>
+        <div class="footer-extra">
+            <p>&copy; 2025 Track&Trace. Todos los derechos reservados.</p>
+            <p>Contacto: <a href="mailto:info@tracktrace.com">info@tracktrace.com</a> | Tel: +54 11 1234-5678</p>
+            <p>Dirección: Av. Siempre Viva 123, Buenos Aires, Argentina</p>
+        </div>
     </footer>
 </body>
 
