@@ -1,3 +1,36 @@
+<?php
+
+session_start();
+if (!isset($_SESSION['numEnvios'])) {
+    $_SESSION['numEnvios'] = [];
+}
+$numEnvios = &$_SESSION['numEnvios'];
+$estados = ["Preparando para transporte", "En camino", "Llegando a la sucursal", "Listo para retirar"];
+
+if($_SERVER["REQUEST_METHOD"] === "POST"){
+    $num = rand(1,1000000);
+    $numEnvios[] = $num;
+    echo "Su compra fue realizada con éxito, el número del envío es el siguiente: $num";
+    exit;
+}
+
+if($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['trackingNumber'])){
+
+    $trackingNumber = (int)$_GET['trackingNumber'];
+    if(in_array($trackingNumber, $numEnvios)){
+        $estadoAleatorio = $estados[array_rand($estados)];
+        echo '<div class="tracking-status success">Estado: ' . $estadoAleatorio . '</div>';
+        exit;
+    }
+    else{
+        echo '<div class="tracking-status error">No se encontró información para el número ingresado.</div>';
+        exit;
+    }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +69,7 @@
             <div class="tracking-title-bar">Número de Seguimiento</div>
             <div class="tracking-form-container">
                 <form id="tracking-form">
-                    <input type="text" placeholder="Ingresá tu número de seguimiento" />
+                    <input type="text" id="tracking-number" placeholder="Ingresá tu número de seguimiento" />
                     <button type="submit">Consultar</button>
                 </form>
                 <div id="tracking-result"></div>
