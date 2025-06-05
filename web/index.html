@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div id="products-grid" class="products-grid">
+        <div id="producto1" class="producto" onclick="mostrarDetalles('producto1')">
+            <img src="imagenes/producto1.jpg" alt="imagen del producto 1" class="img-producto">
+            <h3>Producto 1</h3>
+            <span class="precio">$10.00</span>
+            <div class="descripcion">
+                <p>Descripción del producto 1. Este es un producto de alta calidad que ofrece excelentes características
+                    y beneficios.</p>
+                <ul class="caracteristicas">
+                    <li>Característica 1</li>
+                    <li>Característica 2</li>
+                    <li>Característica 3</li>
+
+                </ul>
+                <div class="comprar">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="1">
+                    
+                    <button class="btn" onclick="comprarProducto('producto2')">Comprar</button>
+                </div>
+            </div>
+
+        </div>
+        <div id="producto2" class="producto" onclick="mostrarDetalles('producto2')">
+            <img src="imagenes/producto2.jpg" alt="imagen del producto 2" class="img-producto">
+            <h3>Producto 2</h3>
+            <span class="precio">$10.00</span>
+            <div class="descripcion">
+                <p>Descripción del producto 2. Este es un producto de alta calidad que ofrece excelentes características
+                    y beneficios.</p>
+                <ul class="caracteristicas">
+                    <li>Característica 1</li>
+                    <li>Característica 2</li>
+                    <li>Característica 3</li>
+                </ul>
+                <div class="comprar" >
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="1">
+                    <button class="btn" onclick="comprarProducto('producto2')">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
