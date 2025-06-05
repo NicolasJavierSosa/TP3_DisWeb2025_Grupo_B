@@ -2,14 +2,22 @@
 // Procesamiento de compra
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['nombre'])) {
     session_start();
-    if (!isset($_SESSION['numEnvios'])) {
-        $_SESSION['numEnvios'] = [];
+    if (!isset($_SESSION['envios'])) {
+        $_SESSION['envios'] = []; // Cambiamos a array asociativo
     }
-    $numEnvios = &$_SESSION['numEnvios'];
+    
     $estados = ["Preparando para transporte", "En camino", "Llegando a la sucursal", "Listo para retirar"];
     
-    $num = rand(1, 1000000);
-    $numEnvios[] = $num;
+    // Generar número único
+    do {
+        $num = rand(1, 1000000);
+    } while (array_key_exists($num, $_SESSION['envios']));
+    
+    // Asignar estado aleatorio pero fijo para este envío
+    $estado = $estados[array_rand($estados)];
+    
+    // Guardar ambos datos
+    $_SESSION['envios'][$num] = $estado;
     
     $producto = $_POST['producto'] ?? 'Desconocido';
     $cantidad = $_POST['cantidad'] ?? 1;
@@ -18,14 +26,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['nombre'])) {
     exit;
 }
 
-// Procesamiento de seguimiento (si lo necesitas)
+// Procesamiento de seguimiento
 if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['trackingNumber'])) {
     session_start();
     $trackingNumber = (int)$_GET['trackingNumber'];
-    if(isset($_SESSION['numEnvios']) && in_array($trackingNumber, $_SESSION['numEnvios'])) {
-        $estados = ["Preparando para transporte", "En camino", "Llegando a la sucursal", "Listo para retirar"];
-        $estadoAleatorio = $estados[array_rand($estados)];
-        echo '<div class="tracking-status success">Estado: ' . $estadoAleatorio . '</div>';
+    
+    if (isset($_SESSION['envios']) && array_key_exists($trackingNumber, $_SESSION['envios'])) {
+        // Obtener el estado fijo asignado a este número
+        $estado = $_SESSION['envios'][$trackingNumber];
+        echo '<div class="tracking-status success">Estado: ' . htmlspecialchars($estado) . '</div>';
     } else {
         echo '<div class="tracking-status error">No se encontró información para el número ingresado.</div>';
     }
