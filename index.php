@@ -49,6 +49,7 @@ if($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['trackingNumber'])){
     </nav>
     <nav id="main-nav">
         <ul id="nav-list">
+            <li><a href="indexN.html">Catalogo</a></li>
             <li><a href="">Envíos Internacionales</a></li>
             <li><a href="">Búsqueda Paquetes</a></li>
             <li><a href="">Nuestras Sucursales</a></li>
