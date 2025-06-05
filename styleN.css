@@ -1,25 +1,101 @@
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: #0a0a0a;
-    /* Fondo oscuro */
-    color: #e0e0e0;
-    /* Texto claro */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: #0a0101;
+    margin: 0;
+    background-image: url('./img/body-pat.png');
+    background-size: 40px 40px;
+    /* or use 'contain', or a specific size like '100px 100px' */
 }
-.products-grid{
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: #ebebeb;
+    margin: 0;
+    background-image: url(./img/body-pat.png);
+    background-size: 40px 40px;
+    /* or use 'contain', or a specific size like '100px 100px' */
+}
+
+#title-bar {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+#logo {
+    width: 200px;
+    margin: 10px 0 10px 20px;
+    display: block;
+    height: auto;
+}
+
+#logo-title {
+    font-size: 20px;
+    color: #ffd10c;
+    font-weight: bold;
+    margin: 10px 0 10px 9px;
+    line-height: 0.8;
+}
+
+#title-container {
+    display: flex;
+    align-items: center;
+    width: 5%;
+}
+
+#nav-list {
+    list-style: none;
+    background: rgba(54, 56, 133, 0.7);
+    backdrop-filter: blur(10px);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#nav-list li {
+    margin: 0 10px;
+    flex: 1;
+    text-align: center;
+}
+
+#nav-list li a {
+    color: #fff;
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: text-decoration 0.2s;
+}
+
+#nav-list li a:hover {
+    text-decoration: underline;
+}
+
+.products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     padding: 2rem;
     justify-items: center;
 }
+
 .producto {
     width: 100%;
-    max-width: 350px; /* Tamaño fijo máximo */
+    max-width: 350px;
+    /* Tamaño fijo máximo */
     margin: auto;
-    background-color: #1a1a1a;
+    background-color: rgba(156, 159, 207, 0.76);
     border-radius: 1rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(12, 1, 109, 0.541);
+    overflow: hidden;
+    /*cursor: pointer;*/
     transition: all 0.3s ease-in-out;
     border: 2px solid transparent;
     display: flex;
@@ -27,6 +103,16 @@ body {
     padding: 1rem;
     align-items: center;
 }
+
+.producto-info {
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+    margin: auto;
+    width: 100%;
+    flex-direction: column;
+}
+
 .img-producto {
     width: 100%;
     height: 200px;
@@ -34,8 +120,10 @@ body {
     border-radius: 0.5rem;
     margin-bottom: 1rem;
 }
+
 .precio {
-    background-color: #193c74; /* Azul para el precio */
+    background-color: #193c74;
+    /* Azul para el precio */
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
@@ -43,15 +131,19 @@ body {
     display: inline-block;
     text-align: center;
 }
-.btn{
-    background-color: #ef4444; /* Rojo para el botón de añadir al carrito */
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            transition: background-color 0.3s ease;
-            font-weight: 600;
+
+.btn {
+    background-color: #ef4444;
+    /* Rojo para el botón de añadir al carrito */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+    margin-bottom: 5px;
 }
-.btn:hover{
+
+.btn:hover {
     background-color: #d32f2f;
 }
 
@@ -64,25 +156,89 @@ body {
     /* Sombra más pronunciada */
 }
 
-.descripcion {
-    max-height: 0;
-    /* Oculto por defecto */
-    overflow: hidden;
-    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
-    /* Transición para altura y padding */
-    padding-top: 0;
-    padding-bottom: 0;
-}
 
 .producto.expanded .descripcion {
     max-height: 500px;
     /* Altura máxima para mostrar el contenido */
     padding-top: 1rem;
     padding-bottom: 1rem;
+    background-color: rgba(255, 255, 255, 0.178);
+    border-top: 1px solid #ccc;
+    width: 100%;
+    text-align: left;
+    border-radius: 0.5rem;
 }
-.comprar{
+
+
+.descripcion {
+    background-color: rgba(255, 255, 255, 0.1);
+    /* o el color que quieras */
+    padding: 1rem;
+    border-radius: 0.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.descripcion p {
+    margin-bottom: 0.75rem;
+    /* antes: 0.75rem */
+    font-size: 0.95rem;
+    color: #222;
+    font-weight: 500;
+}
+
+.caracteristicas {
+    padding-left: 1rem;
+    margin: 0;
+}
+
+.descripcion p,
+.descripcion .caracteristicas {
+    background-color: transparent;
+}
+
+.caracteristicas li {
+    margin-bottom: 0.3rem;
+    /* menos espacio entre ítems */
+    position: relative;
+    padding-left: 1.2rem;
+    /* espacio para el icono ✔ */
+    font-size: 0.9rem;
+    color: #5e5c5c;
+    line-height: 1.4;
+    list-style: none;
+}
+
+.caracteristicas li::before {
+    content: "★";
+    color: #d43636;
+    position: absolute;
+    left: 0;
+    top: 0.05rem;
+    /* alinea mejor verticalmente */
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.comprar label {
+    font-weight: 600;
+    color: #333;
+}
+
+.comprar input[type="number"] {
+    width: 60px;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+    border: 1px solid #999;
+}
+
+
+.comprar {
     text-align: center;
-    
+
 }
 
 .modal {
@@ -92,43 +248,68 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(44, 42, 77, 0.5);
+    /* Fondo semitransparente detrás del modal */
+    align-items: center;
+    /* CENTRADO vertical */
+    justify-content: center;
+    /*    height: 100%;*/
+    /*display: flex;*/
+    height: 100vh;
+    overflow: auto;
+
+
+    /*padding: 1rem;*/
 }
 
 .modal-contenido {
-    background-color: #222; /* tu fondo deseado */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Fondo claro-transparente */
+    backdrop-filter: blur(10px);
+    /* Efecto frosted glass */
     margin: 5% auto;
     padding: 2rem;
     border-radius: 1rem;
     width: 90%;
     max-width: 600px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    color: white;
+    position: relative;
 }
 
 
 .cerrar {
-    float: right;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    color: white;
 }
 
+#formCompra{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
 
 .formulario {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
-    background-color: #222;
-    padding: 2rem;
+    gap: 1rem;
+    background-color: transparent;
     border-radius: 1rem;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     max-width: 400px;
-    margin: 2rem auto;
+    width: 80%;
+    margin: 0 auto;
 }
 
-.modal-contenido{
-    background-color: rgba(0,0,0,0.5);
+.modal-contenido {
+    background-color: rgba(36, 39, 49, 0.5);
 }
 
 .formulario label {
@@ -140,20 +321,28 @@ body {
 .formulario input,
 .formulario textarea,
 .formulario select {
-    background: #181818;
+    /*background: #181818;
     color: #e0e0e0;
     border: 1.5px solid #333;
     border-radius: 0.5rem;
     padding: 0.75rem 1rem;
     font-size: 1rem;
     transition: border-color 0.3s;
-    outline: none;
+    outline: none;*/
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1.5px solid #ccc;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
 }
 
 .formulario input:focus,
 .formulario textarea:focus,
 .formulario select:focus {
+    /*border-color: #ef4444;*/
     border-color: #ef4444;
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 .formulario button,
@@ -172,4 +361,3 @@ body {
 .formulario input[type="submit"]:hover {
     background-color: #ef4444;
 }
-

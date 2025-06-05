@@ -39,21 +39,20 @@ if($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['trackingNumber'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
-    <title>Track&Trace</title>
+    <title>Atlus-Tp4</title>
 </head>
 
 <body>
-
+ 
     <nav id="title-bar">
-        <img src="./img/logo.png" alt="main logo" id="logo">
-    </nav>
+        <img src="./img/logo.png" alt="main logo" id="logo" >
+    </nav> 
     <nav id="main-nav">
         <ul id="nav-list">
-            <li><a href="indexN.html">Catalogo</a></li>
             <li><a href="">Envíos Internacionales</a></li>
             <li><a href="">Búsqueda Paquetes</a></li>
             <li><a href="">Nuestras Sucursales</a></li>
-            <li><a href="">Catálogo</a></li>
+            <li><a href="indexN.html">Catálogo</a></li>
             <li><a href="">Calendario de Lanzamientos</a></li>
         </ul>
     </nav>

@@ -1,7 +1,8 @@
 let expandedProducto = null;
+
 function comprarProducto(productoId) {
     const producto = document.getElementById(productoId);
-    const cantidadInput = producto.querySelector('input[name="cantidad"]');
+    //const cantidadInput = producto.querySelector('input[name="cantidad"]');
     const botonesComprar = document.querySelectorAll('.btnComprar');
 botonesComprar.forEach((boton, index) => {
     boton.addEventListener('click', function() {
@@ -17,7 +18,7 @@ botonesComprar.forEach((boton, index) => {
 function mostrarDetalles(productoId) {
     const producto = document.getElementById(productoId);
 
-    if(expandedProducto && expandedProducto.id !== producto) {
+    if(expandedProducto && expandedProducto !== producto) {
         expandedProducto.classList.remove('expanded');
     }
     producto.classList.toggle('expanded');
@@ -26,8 +27,8 @@ function mostrarDetalles(productoId) {
     }else{
         expandedProducto = null;
     }
-
 }
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const btnComprar = document.getElementById('btnComprar');
