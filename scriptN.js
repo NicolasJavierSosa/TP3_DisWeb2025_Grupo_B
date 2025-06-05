@@ -126,3 +126,13 @@ document.addEventListener('DOMContentLoaded', function() {
         alert(`¡Compra confirmada con éxito!\nNúmero de pedido: ${numeroPedido}\nSe enviará confirmación a: ${correo.value}`);
     });
 });
+document.addEventListener('DOMContentLoaded', () => {
+        const currentPath = window.location.pathname.split('/').pop(); // solo el archivo, ej: 'index.php'
+        
+        document.querySelectorAll('#nav-list a').forEach(link => {
+            const linkPath = link.getAttribute('href').split('/').pop(); // también extrae solo el archivo
+            if (linkPath === currentPath) {
+                link.classList.add('active');
+            }
+        });
+    });
