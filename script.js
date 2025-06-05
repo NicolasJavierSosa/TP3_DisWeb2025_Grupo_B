@@ -18,38 +18,66 @@ document.addEventListener('DOMContentLoaded', function(){
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('tracking-form');
     if (!form) return;
+    
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-
         const trackingNumber = document.getElementById('tracking-number').value.trim();
-
-        fetch("index.php?trackingNumber=" + encodeURIComponent(trackingNumber), {
+        
+        fetch("indexN.php?trackingNumber=" + encodeURIComponent(trackingNumber), {
             method: "GET"
         })
         .then(res => res.text())
         .then(respuesta => {
             document.getElementById('tracking-result').innerHTML = respuesta;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('tracking-result').innerHTML = 
+                '<div class="tracking-status error">Error al consultar el estado</div>';
         });
-        
     });
 });
 
+//Script catalogo
+
 let expandedProducto = null;
-
 function comprarProducto(productoId) {
-    const producto = document.getElementById(productoId);
-    const cantidadInput = producto.querySelector('input[name="cantidad"]');
-    const cantidad = parseInt(cantidadInput.value);
-
-    if (cantidad < 1 || isNaN(cantidad)) {
-        alert('Por favor ingrese una cantidad válida');
-        return;
-    }
-
-    const modal = document.getElementById('modalCompra');
-    modal.style.display = 'block';
-
+    // Mostrar el modal de compra
+    document.getElementById('modalCompra').style.display = 'block';
+    
+    // Guardar el ID del producto para usarlo después
+    document.getElementById('formCompra').dataset.producto = productoId;
 }
+
+// Manejar el envío del formulario// En la función que maneja el envío del formulario de compra
+document.getElementById('formCompra').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const productoId = this.dataset.producto;
+    const cantidad = document.getElementById(`cantidad-${productoId}`).value;
+    
+    formData.append('producto', productoId);
+    formData.append('cantidad', cantidad);
+    
+    // Enviar formulario tradicionalmente (sin AJAX)
+    this.submit();
+});
+
+// Cerrar modal al hacer clic en la X
+document.querySelector('.cerrar').addEventListener('click', function() {
+    document.getElementById('modalCompra').style.display = 'none';
+});
+
+// Cerrar modal al hacer clic fuera del contenido
+window.addEventListener('click', function(event) {
+    if (event.target === document.getElementById('modalCompra')) {
+        document.getElementById('modalCompra').style.display = 'none';
+    }
+});
+
+
+
 function mostrarDetalles(productoId) {
     const producto = document.getElementById(productoId);
 
@@ -80,20 +108,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.cerrar').addEventListener('click', function () {
         document.getElementById('modalCompra').style.display = 'none';
     });
-    document.getElementById('formCompra').addEventListener('submit', function (e) {
-        const userEmail = document.getElementById('correo').value;
-        this.action = `https://formsubmit.co/${userEmail}`;
-    });
     const nombre = document.getElementById('nombre');
     const telefono = document.getElementById('telefono');
     const correo = document.getElementById('correo');
     const ubicacion = document.getElementById('ubicacion');
     const cantidadInput = document.getElementById('cantidad');
     const numeroPedidoInput = document.getElementById('numero_pedido');
-
-    function generarNumeroPedido() {
-        return Math.floor(100000 + Math.random() * 900000);
-    }
 
     // Abrir modal
     btnComprar.addEventListener('click', function () {
@@ -143,23 +163,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Generar y asignar número de pedido
-        const numeroPedido = generarNumeroPedido();
-        numeroPedidoInput.value = numeroPedido;
-
-        // Guardar en localStorage
-        const datosCliente = {
-            numeroPedido: numeroPedido,
-            nombre: nombre.value.trim(),
-            telefono: telefono.value.trim(),
-            correo: correo.value.trim(),
-            ubicacion: ubicacion.value.trim(),
-            fecha: new Date().toLocaleString()
-        };
-        localStorage.setItem('datosCliente', JSON.stringify(datosCliente));
-
-        // Mostrar confirmación (el formulario se enviará automáticamente)
-        alert(`¡Compra confirmada con éxito!\nNúmero de pedido: ${numeroPedido}\nSe enviará confirmación a: ${correo.value}`);
     });
 });
 document.addEventListener('DOMContentLoaded', () => {

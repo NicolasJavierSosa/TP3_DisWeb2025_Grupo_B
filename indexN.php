@@ -1,3 +1,38 @@
+<?php
+// Procesamiento de compra
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['nombre'])) {
+    session_start();
+    if (!isset($_SESSION['numEnvios'])) {
+        $_SESSION['numEnvios'] = [];
+    }
+    $numEnvios = &$_SESSION['numEnvios'];
+    $estados = ["Preparando para transporte", "En camino", "Llegando a la sucursal", "Listo para retirar"];
+    
+    $num = rand(1, 1000000);
+    $numEnvios[] = $num;
+    
+    $producto = $_POST['producto'] ?? 'Desconocido';
+    $cantidad = $_POST['cantidad'] ?? 1;
+    
+    header("Location: indexN.php?pedido=$num&status=success");
+    exit;
+}
+
+// Procesamiento de seguimiento (si lo necesitas)
+if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['trackingNumber'])) {
+    session_start();
+    $trackingNumber = (int)$_GET['trackingNumber'];
+    if(isset($_SESSION['numEnvios']) && in_array($trackingNumber, $_SESSION['numEnvios'])) {
+        $estados = ["Preparando para transporte", "En camino", "Llegando a la sucursal", "Listo para retirar"];
+        $estadoAleatorio = $estados[array_rand($estados)];
+        echo '<div class="tracking-status success">Estado: ' . $estadoAleatorio . '</div>';
+    } else {
+        echo '<div class="tracking-status error">No se encontró información para el número ingresado.</div>';
+    }
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +53,7 @@
             <li><a href="" >Envíos Internacionales</a></li>
             <li><a href="index.php">Búsqueda Paquetes</a></li>
             <li><a href="">Nuestras Sucursales</a></li>
-            <li><a href="indexN.html">Catálogo</a></li>
+            <li><a href="indexN.php">Catálogo</a></li>
             <li><a href="">Calendario de Lanzamientos</a></li>
         </ul>
     </nav>
@@ -246,9 +281,10 @@
             <span class="cerrar">&times;</span>
             <h2>Complete datos de envio</h2>
             <!--  method="POST" al formulario -->
-            <form action="https://formsubmit.co/" method="POST" id="formCompra">
+            <form action="" method="POST" id="formCompra">
                 <!-- Campos ocultos para FormSubmit -->
                 <div class="formulario">
+                    <input type="hidden" name="numero_pedido" id="numero_pedido">
                     <input type="hidden" name="_template" value="table">
                     <input type="hidden" name="_subject" value="Pedido Confirmado - Atlus.com">
                     <input type="hidden" name="_next" value="https://localhost/TP4_DisWeb2025_Grupo_B">

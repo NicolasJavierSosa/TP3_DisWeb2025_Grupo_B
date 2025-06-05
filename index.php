@@ -1,33 +1,44 @@
 <?php
-
 session_start();
-if (!isset($_SESSION['numEnvios'])) {
-    $_SESSION['numEnvios'] = [];
-}
-$numEnvios = &$_SESSION['numEnvios'];
-$estados = ["Preparando para transporte", "En camino", "Llegando a la sucursal", "Listo para retirar"];
 
-if($_SERVER["REQUEST_METHOD"] === "POST"){
-    $num = rand(1,1000000);
-    $numEnvios[] = $num;
-    echo "Su compra fue realizada con éxito, el número del envío es el siguiente: $num";
+// Procesar compra
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['nombre'])) {
+    if (!isset($_SESSION['numEnvios'])) {
+        $_SESSION['numEnvios'] = [];
+    }
+    
+    // Generar número aleatorio único
+    do {
+        $num = rand(1, 1000000);
+    } while (in_array($num, $_SESSION['numEnvios']));
+    
+    $_SESSION['numEnvios'][] = $num;
+    
+    // Responder con JSON
+    header('Content-Type: application/json');
+    echo json_encode([
+        'success' => true,
+        'numero_envio' => $num,
+        'producto' => $_POST['producto'] ?? 'Desconocido',
+        'cantidad' => $_POST['cantidad'] ?? 1,
+        'mensaje' => "Su compra fue realizada con éxito",
+        'estado' => "Preparando para transporte"
+    ]);
     exit;
 }
 
-if($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['trackingNumber'])){
-
+// Procesar consulta de tracking
+if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['trackingNumber'])) {
     $trackingNumber = (int)$_GET['trackingNumber'];
-    if(in_array($trackingNumber, $numEnvios)){
-        $estadoAleatorio = $estados[array_rand($estados)];
-        echo '<div class="tracking-status success">Estado: ' . $estadoAleatorio . '</div>';
-        exit;
-    }
-    else{
+    $estados = ["Preparando para transporte", "En camino", "Llegando a la sucursal", "Listo para retirar"];
+    
+    if (isset($_SESSION['numEnvios']) && in_array($trackingNumber, $_SESSION['numEnvios'])) {
+        echo '<div class="tracking-status success">Estado: ' . $estados[array_rand($estados)] . '</div>';
+    } else {
         echo '<div class="tracking-status error">No se encontró información para el número ingresado.</div>';
-        exit;
     }
+    exit;
 }
-
 ?>
 
 
@@ -52,7 +63,7 @@ if($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['trackingNumber'])){
             <li><a href="">Envíos Internacionales</a></li>
             <li><a href="">Búsqueda Paquetes</a></li>
             <li><a href="">Nuestras Sucursales</a></li>
-            <li><a href="indexN.html">Catálogo</a></li>
+            <li><a href="indexN.php">Catálogo</a></li>
             <li><a href="">Calendario de Lanzamientos</a></li>
         </ul>
     </nav>
