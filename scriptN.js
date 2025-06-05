@@ -2,18 +2,17 @@ let expandedProducto = null;
 
 function comprarProducto(productoId) {
     const producto = document.getElementById(productoId);
-    //const cantidadInput = producto.querySelector('input[name="cantidad"]');
-    const botonesComprar = document.querySelectorAll('.btnComprar');
-botonesComprar.forEach((boton, index) => {
-    boton.addEventListener('click', function() {
-        const cantidad = parseInt(cantidadInputs[index].value);
-        if (cantidad < 1 || isNaN(cantidad)) {
-            alert('Por favor ingrese una cantidad válida');
-            return;
-        }
-        modal.style.display = 'block';
-    });
-});
+    const cantidadInput = producto.querySelector('input[name="cantidad"]');
+    const cantidad = parseInt(cantidadInput.value);
+
+    if (cantidad < 1 || isNaN(cantidad)) {
+        alert('Por favor ingrese una cantidad válida');
+        return;
+    }
+
+    const modal = document.getElementById('modalCompra');
+    modal.style.display = 'block';
+
 }
 function mostrarDetalles(productoId) {
     const producto = document.getElementById(productoId);
@@ -29,11 +28,22 @@ function mostrarDetalles(productoId) {
     }
 }
 
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('modalCompra');
+    const contenido = modal.querySelector('.modal-contenido');
+
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const btnComprar = document.getElementById('btnComprar');
     const modal = document.getElementById('modalCompra');
-    const cerrar = document.querySelector('.cerrar');
+    document.querySelector('.cerrar').addEventListener('click', function() {
+    document.getElementById('modalCompra').style.display = 'none';
+});
     document.getElementById('formCompra').addEventListener('submit', function(e) {
     const userEmail = document.getElementById('correo').value;
     this.action = `https://formsubmit.co/${userEmail}`;
