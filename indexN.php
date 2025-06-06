@@ -22,9 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['nombre'])) {
     $producto = $_POST['producto'] ?? 'Desconocido';
     $cantidad = $_POST['cantidad'] ?? 1;
     
-    header("Location: indexN.php?pedido=$num&status=success");
+    header("Location: indexN.php?success=1&num_envio=$num");
+
     exit;
 }
+
+
 
 // Procesamiento de seguimiento
 if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['trackingNumber'])) {
@@ -297,7 +300,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['trackingNumber'])) {
                     <input type="hidden" name="_template" value="table">
                     <input type="hidden" name="_subject" value="Pedido Confirmado - Atlus.com">
                     <input type="hidden" name="_next" value="https://localhost/TP4_DisWeb2025_Grupo_B">
-                    <input type="hidden" name="numero_pedido" id="numero_pedido">
 
                     <label for="nombre">Nombre completo:</label>
                     <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre completo" required>
@@ -317,6 +319,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['trackingNumber'])) {
             </form>
         </div>
     </div>
+
     <footer>
         <table>
             <tbody>
@@ -373,6 +376,32 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['trackingNumber'])) {
             <p>Dirección: Av. Siempre Viva 123, Buenos Aires, Argentina</p>
         </div>
     </footer>
+
+    <div id="toast" class="toast hidden">
+        <p id="toast-message"></p>
+    </div>
+
+
+    <?php 
+if(isset($_GET['success']) && $_GET['success'] == 1 && isset($_GET['num_envio']) ): 
+?>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const toast = document.getElementById('toast');
+        const message = document.getElementById('toast-message');
+        message.textContent = '¡Compra exitosa! Número de envío: <?= $_GET["num_envio"] ?>';
+        toast.classList.remove('hidden');
+        toast.classList.add('show');
+
+        // Oculta después de 5 segundos
+        setTimeout(() => {
+            toast.classList.remove('show');
+            toast.classList.add('hidden');
+        }, 5000);
+    });
+</script>
+<?php endif; ?>
+
 </body>
 
 </html>
